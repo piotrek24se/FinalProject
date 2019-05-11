@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import java.util.Arrays;
 
+//class should be used for connection between H2 and security
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 

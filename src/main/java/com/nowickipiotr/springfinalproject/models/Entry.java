@@ -8,6 +8,8 @@ import javax.persistence.*;
 @Entity
 public class Entry {
 
+    @Id
+    @GeneratedValue
     private Long id;
     private String content;
     private String dateOfCreation;

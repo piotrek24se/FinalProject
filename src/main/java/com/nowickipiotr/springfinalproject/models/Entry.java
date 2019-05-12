@@ -27,6 +27,13 @@ public class Entry {
     public Entry() {
     }
 
+    public Entry(String content, String dateOfCreation, EntryStatus status, EntryType type) {
+        this.content = content;
+        this.dateOfCreation = dateOfCreation;
+        this.status = status;
+        this.type = type;
+    }
+
     public Long getId() {
         return id;
     }

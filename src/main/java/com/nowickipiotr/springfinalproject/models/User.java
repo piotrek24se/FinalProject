@@ -30,6 +30,16 @@ public class User {
     public User() {
     }
 
+    public User(String userName, String password, String linkAccountName, String viewAccountName, String dateOfCreation, UserStatus status, UserType type) {
+        this.userName = userName;
+        this.password = password;
+        this.linkAccountName = linkAccountName;
+        this.viewAccountName = viewAccountName;
+        this.dateOfCreation = dateOfCreation;
+        this.status = status;
+        this.type = type;
+    }
+
     public Long getId() {
         return id;
     }

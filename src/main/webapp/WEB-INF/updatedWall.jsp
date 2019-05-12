@@ -21,10 +21,12 @@
 
 <body>
 
+<h1>Test</h1>
+
 <%int counter = 1;%>
 
 <ol>
-    <c:forEach var="i" items="${entryList}">
+    <c:forEach var="i" items="${entryListAfterAddingPost}">
 
         <table>
 

@@ -21,7 +21,9 @@
 
 <body>
 
-<h1>Test</h1>
+<h1>
+    List of posts actually published
+</h1>
 
 <%int counter = 1;%>
 

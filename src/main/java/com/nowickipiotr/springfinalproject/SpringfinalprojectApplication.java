@@ -32,37 +32,38 @@ public class SpringfinalprojectApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        User user1 = new User();
-        user1.setUserName("Adam");
-        user1.setPassword("1111");
-        user1.setDateOfCreation("11.05.2019");
-        user1.setLinkAccountName("user1");
-        user1.setStatus(UserStatus.ACTIVE);
-        user1.setType(UserType.PRIVATE);
-        user1.setViewAccountName("user1");
-
-        Entry entry1 = new Entry();
-        entry1.setContent("test");
-        entry1.setDateOfCreation("10.05.2019");
-        entry1.setStatus(EntryStatus.ORIGINAL);
-        entry1.setType(EntryType.ENTRY);
-
-        Entry entry2 = new Entry();
-        entry2.setContent("test");
-        entry2.setDateOfCreation("10.05.2019");
-        entry2.setStatus(EntryStatus.MODIFIED);
-        entry2.setType(EntryType.COMMENT);
-
-        Set<Entry> entrySet = new HashSet<>();
-        entrySet.add(entry1);
-        entrySet.add(entry2);
-
-        user1.setEntries(entrySet);
-        entry1.setUser(user1);
-        entry2.setUser(user1);
-
-        userRepository.save(user1);
-        entryRepository.saveAll(entrySet);
+        // user and entries used for H2 connection tests
+//        User user1 = new User();
+//        user1.setUserName("Adam");
+//        user1.setPassword("1111");
+//        user1.setDateOfCreation("11.05.2019");
+//        user1.setLinkAccountName("user1");
+//        user1.setStatus(UserStatus.ACTIVE);
+//        user1.setType(UserType.PRIVATE);
+//        user1.setViewAccountName("user1");
+//
+//        Entry entry1 = new Entry();
+//        entry1.setContent("test");
+//        entry1.setDateOfCreation("10.05.2019");
+//        entry1.setStatus(EntryStatus.ORIGINAL);
+//        entry1.setType(EntryType.ENTRY);
+//
+//        Entry entry2 = new Entry();
+//        entry2.setContent("test");
+//        entry2.setDateOfCreation("10.05.2019");
+//        entry2.setStatus(EntryStatus.MODIFIED);
+//        entry2.setType(EntryType.COMMENT);
+//
+//        Set<Entry> entrySet = new HashSet<>();
+//        entrySet.add(entry1);
+//        entrySet.add(entry2);
+//
+//        user1.setEntries(entrySet);
+//        entry1.setUser(user1);
+//        entry2.setUser(user1);
+//
+//        userRepository.save(user1);
+//        entryRepository.saveAll(entrySet);
 
     }
 }

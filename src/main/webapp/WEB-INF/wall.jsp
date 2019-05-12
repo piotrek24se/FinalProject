@@ -21,6 +21,10 @@
 
 <body>
 
+<h1>
+    List of posts actually published
+</h1>
+
 <%int counter = 1;%>
 
 <ol>

@@ -27,6 +27,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+
+        //in memory authentication
         auth
                 .inMemoryAuthentication()
                 .withUser("pn")
@@ -34,9 +36,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .roles("ADMIN")
                 .and()
                 .passwordEncoder(bcrypt());
+        auth
+                .inMemoryAuthentication()
+                .withUser("rambo")
+                .password(encodedpassword)
+                .roles("ADMIN")
+                .and()
+                .passwordEncoder(bcrypt());
 
-        //database (user data)
-//        auth.userDetailsService(userDetailsService).passwordEncoder(bcrypt());
+        //database authentication
+        auth.userDetailsService(userDetailsService).passwordEncoder(bcrypt());
     }
 
     @Override

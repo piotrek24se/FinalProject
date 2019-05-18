@@ -9,7 +9,13 @@
 
 <h1>Sorry. Actually there are no entries!</h1><br>
 
-<a href="/addPost"><h2>Add post</h2></a>
+<form action="/addPost" method="get">
+    <input type="submit" value="Add post"/>
+</form>
+
+<form action="<%=request.getContextPath()%>/appLogout" method="post">
+    <input type="submit" value="Logout"/>
+</form>
 
 </body>
 

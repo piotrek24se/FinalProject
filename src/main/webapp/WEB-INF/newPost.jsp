@@ -21,6 +21,10 @@
     <input type="submit" value="Add">
 </form>
 
+<form action="<%=request.getContextPath()%>/appLogout" method="post">
+    <input type="submit" value="Logout"/>
+</form>
+
 </body>
 
 </html>

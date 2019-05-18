@@ -59,9 +59,11 @@
     </c:forEach>
 </ol>
 
-<a href="/addPost"><h2>Add post</h2></a>
+<form action="/addPost" method="get">
+    <input type="submit" value="Add post"/>
+</form>
 
-<form action="<%=request.getContextPath()%>/appLogout" method="POST">
+<form action="<%=request.getContextPath()%>/appLogout" method="post">
     <input type="submit" value="Logout"/>
 </form>
 

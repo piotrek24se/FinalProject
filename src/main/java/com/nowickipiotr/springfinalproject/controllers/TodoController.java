@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +34,9 @@ public class TodoController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @GetMapping("/wall")
     String wall(Model model) {
@@ -82,7 +86,6 @@ public class TodoController {
         model.addAttribute("entry", entrySet);
         model.addAttribute("user", user);
 
-//        userRepository.save(user);
         entryRepository.save(entry);
 
         List<Entry> entryListAfterAddingPost = entryRepository.findAll();
@@ -90,6 +93,33 @@ public class TodoController {
         model.addAttribute("entryListAfterAddingPost", entryListAfterAddingPost);
 
         return "updatedWall";
+    }
+
+    @GetMapping("/signUp")
+    String signUp() {
+        return "/register";
+    }
+
+    @GetMapping("/userCreation")
+    String userCreation(
+            @RequestParam("username") String username,
+            @RequestParam("password") String password,
+            @RequestParam("linkAccountName") String linkAccountName,
+            @RequestParam("viewAccountName") String viewAccountName,
+            @RequestParam("dateOfCreation") String dateOfCreation,
+            @RequestParam("status") String status,
+            @RequestParam("type") String type,
+            Model model
+
+    ) {
+
+        //dokonczyc
+        User user = new User();
+
+        user.setUserName(username);
+        user.setPassword(passwordEncoder.encode(password));
+
+        return "/userDatabaseInsert";
     }
 
 }

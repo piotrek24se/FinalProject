@@ -9,12 +9,17 @@ import com.nowickipiotr.springfinalproject.models.enums.UserType;
 import com.nowickipiotr.springfinalproject.repositories.EntryRepository;
 import com.nowickipiotr.springfinalproject.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import sun.plugin.liveconnect.SecurityContextHelper;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -53,18 +58,13 @@ public class TodoController {
             @RequestParam("dateOfCreation") String dateOfCreation,
             @RequestParam("entryStatus") String entryStatus,
             @RequestParam("entryType") String entryType,
-            @RequestParam("userName") String userName,
             Model model
     ) {
 
-        User user = new User(
-                userName,
-                "test",
-                "test",
-                userName,
-                "12.05.2019",
-                UserStatus.ACTIVE,
-                UserType.PRIVATE);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentLoggedInUsername = authentication.getName();
+
+        User user = userRepository.findByUserName(currentLoggedInUsername).orElseThrow(EntityNotFoundException::new);
 
         Entry entry = new Entry();
         entry.setContent(content);
@@ -82,7 +82,7 @@ public class TodoController {
         model.addAttribute("entry", entrySet);
         model.addAttribute("user", user);
 
-        userRepository.save(user);
+//        userRepository.save(user);
         entryRepository.save(entry);
 
         List<Entry> entryListAfterAddingPost = entryRepository.findAll();
@@ -91,9 +91,5 @@ public class TodoController {
 
         return "updatedWall";
     }
-
-
-
-
 
 }

@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import java.util.Arrays;
 
-//class should be used for connection between database and security
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 

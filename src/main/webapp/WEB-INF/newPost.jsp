@@ -18,7 +18,6 @@
     <input type="text" name="dateOfCreation"> Date of Creation<br><br>
     <input type="text" name="entryStatus"> Entry status<br><br>
     <input type="text" name="entryType"> Entry type<br><br>
-    <input type="text" name="userName"> Username<br><br>
     <input type="submit" value="Add">
 </form>
 

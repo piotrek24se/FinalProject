@@ -3,6 +3,7 @@ package com.nowickipiotr.springfinalproject.security;
 import com.nowickipiotr.springfinalproject.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,6 +11,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebSecurity
@@ -29,20 +33,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
         //in memory authentication
-        auth
-                .inMemoryAuthentication()
-                .withUser("pn")
-                .password(encodedpassword)
-                .roles("ADMIN")
-                .and()
-                .passwordEncoder(bcrypt());
-        auth
-                .inMemoryAuthentication()
-                .withUser("rambo")
-                .password(encodedpassword)
-                .roles("ADMIN")
-                .and()
-                .passwordEncoder(bcrypt());
+//        auth
+//                .inMemoryAuthentication()
+//                .withUser("pn")
+//                .password(encodedpassword)
+//                .roles("ADMIN")
+//                .and()
+//                .passwordEncoder(bcrypt());
+//        auth
+//                .inMemoryAuthentication()
+//                .withUser("rambo")
+//                .password(encodedpassword)
+//                .roles("ADMIN")
+//                .and()
+//                .passwordEncoder(bcrypt());
 
         //database authentication
         auth.userDetailsService(userDetailsService).passwordEncoder(bcrypt());
@@ -51,15 +55,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.
-                csrf().disable()
+        http
+                .csrf().disable()
                 .headers().frameOptions().disable()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/private").authenticated()
-                .antMatchers("/private").hasAnyRole("ADMIN")
-                .antMatchers("/wall").authenticated()
-                .antMatchers("/wall").hasAnyRole("ADMIN")
+                .antMatchers("/wall").hasAnyAuthority("ADMIN")
+                .antMatchers("/addPost").hasAnyAuthority("ADMIN")
+                .antMatchers("/newPost").hasAnyAuthority("ADMIN")
+                .anyRequest()
+                .authenticated()
                 .anyRequest()
                 .permitAll()
                 .and()

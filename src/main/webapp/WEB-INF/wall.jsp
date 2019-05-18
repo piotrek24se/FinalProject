@@ -22,7 +22,7 @@
 <body>
 
 <h1>
-    List of posts actually published
+    Welcome! List of posts actually published:
 </h1>
 
 <%int counter = 1;%>

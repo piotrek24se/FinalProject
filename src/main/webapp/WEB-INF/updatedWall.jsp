@@ -61,6 +61,10 @@
 
 <a href="/addPost"><h2>Add post</h2></a>
 
+<form action="<%=request.getContextPath()%>/appLogout" method="POST">
+    <input type="submit" value="Logout"/>
+</form>
+
 </body>
 
 </html>

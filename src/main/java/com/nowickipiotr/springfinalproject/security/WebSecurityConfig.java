@@ -78,6 +78,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutUrl("/appLogout")
-                .logoutSuccessUrl("/login");
+                .logoutSuccessUrl("/login.jsp");
     }
 }

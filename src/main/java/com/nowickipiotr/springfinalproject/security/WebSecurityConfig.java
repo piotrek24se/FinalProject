@@ -27,6 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsServiceImpl userDetailsService;
 
+    //password used for inMemoryAuthentication
     String encodedpassword = new BCryptPasswordEncoder().encode("password");
 
     @Autowired
@@ -68,6 +69,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .permitAll()
                 .and()
-                .formLogin();
+                .formLogin()
+                .loginPage("/login.jsp")
+                .loginProcessingUrl("/appLogin")
+                .usernameParameter("app_username")
+                .passwordParameter("app_password")
+                .defaultSuccessUrl("/wall")
+                .and()
+                .logout()
+                .logoutUrl("/appLogout")
+                .logoutSuccessUrl("/login");
     }
 }

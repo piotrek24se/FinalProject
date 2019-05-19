@@ -95,11 +95,11 @@ public class TodoController {
 
         entryRepository.save(entry);
 
-        List<Entry> entryListAfterAddingPost = entryRepository.findAll();
+        entryList = entryRepository.findAll();
 
-        model.addAttribute("entryListAfterAddingPost", entryListAfterAddingPost);
+        model.addAttribute("entryList", entryList);
 
-        return "updatedWall";
+        return "wall";
     }
 
     @GetMapping("/signUp")

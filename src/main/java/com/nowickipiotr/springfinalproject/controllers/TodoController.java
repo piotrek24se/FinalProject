@@ -100,7 +100,7 @@ public class TodoController {
         return "/register";
     }
 
-    @GetMapping("/userCreation")
+    @PostMapping("/userCreation")
     String userCreation(
             @RequestParam("username") String username,
             @RequestParam("password") String password,
@@ -113,11 +113,21 @@ public class TodoController {
 
     ) {
 
-        //dokonczyc
         User user = new User();
 
         user.setUserName(username);
         user.setPassword(passwordEncoder.encode(password));
+        user.setLinkAccountName(linkAccountName);
+        user.setViewAccountName(viewAccountName);
+        user.setDateOfCreation(dateOfCreation);
+        user.setStatus(Enum.valueOf(UserStatus.class, status));
+        user.setType(Enum.valueOf(UserType.class, type));
+
+        userRepository.save(user);
+
+        User createdUser = userRepository.findByUserName(username).orElseThrow(EntityNotFoundException::new);
+
+        model.addAttribute("createdUser", createdUser);
 
         return "/userDatabaseInsert";
     }

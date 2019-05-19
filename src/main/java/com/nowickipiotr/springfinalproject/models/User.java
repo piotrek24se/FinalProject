@@ -27,6 +27,18 @@ public class User {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
     private Set<Entry> entries;
 
+    @ManyToMany
+    @JoinTable(
+            name = "users_authorities",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "authority_id", referencedColumnName = "id"
+            )
+    )
+    private Set<Authority> authorities;
+
     public User() {
     }
 
@@ -112,6 +124,14 @@ public class User {
         this.entries = entries;
     }
 
+    public Set<Authority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Set<Authority> authorities) {
+        this.authorities = authorities;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -124,6 +144,7 @@ public class User {
                 ", status=" + status +
                 ", type=" + type +
                 ", entries=" + entries +
+                ", authorities=" + authorities +
                 '}';
     }
 }

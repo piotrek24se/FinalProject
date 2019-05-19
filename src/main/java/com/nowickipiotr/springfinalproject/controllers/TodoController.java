@@ -1,29 +1,27 @@
 package com.nowickipiotr.springfinalproject.controllers;
 
+import com.nowickipiotr.springfinalproject.models.Authority;
 import com.nowickipiotr.springfinalproject.models.Entry;
 import com.nowickipiotr.springfinalproject.models.User;
 import com.nowickipiotr.springfinalproject.models.enums.EntryStatus;
 import com.nowickipiotr.springfinalproject.models.enums.EntryType;
 import com.nowickipiotr.springfinalproject.models.enums.UserStatus;
 import com.nowickipiotr.springfinalproject.models.enums.UserType;
+import com.nowickipiotr.springfinalproject.repositories.AuthorityRepository;
 import com.nowickipiotr.springfinalproject.repositories.EntryRepository;
 import com.nowickipiotr.springfinalproject.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import sun.plugin.liveconnect.SecurityContextHelper;
-
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -36,6 +34,9 @@ public class TodoController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    AuthorityRepository authorityRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -136,6 +137,9 @@ public class TodoController {
         User createdUser = userRepository.findByUserName(username).orElseThrow(EntityNotFoundException::new);
 
         model.addAttribute("createdUser", createdUser);
+
+        //dokonczyc
+        Authority userAuthority = authorityRepository.findAuthoritiesByAuthority("ADMIN").orElseThrow(EntityNotFoundException::new);
 
         return "/userDatabaseInsert";
     }

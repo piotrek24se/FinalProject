@@ -1,5 +1,5 @@
 <html>
-<meta http-equiv="Refresh" content="10;url=login.jsp">
+<meta http-equiv="Refresh" content="5;url=login.jsp">
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <head>

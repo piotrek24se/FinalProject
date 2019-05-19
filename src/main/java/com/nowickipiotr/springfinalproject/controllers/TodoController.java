@@ -42,10 +42,12 @@ public class TodoController {
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
+    List<Entry> entryList;
+
     @GetMapping("/wall")
     String wall(Model model) {
 
-        List<Entry> entryList = entryRepository.findAll();
+        entryList = entryRepository.findAll();
 
         if (entryList.size() == 0) {
             return "emptyWall";
@@ -136,6 +138,21 @@ public class TodoController {
         model.addAttribute("createdUser", createdUser);
 
         return "/userDatabaseInsert";
+    }
+
+    @PostMapping("/deletePost")
+    String postDelete(@RequestParam("id") Long id, Model model) {
+
+        entryRepository.deleteById(id);
+
+        entryList = entryRepository.findAll();
+
+        if (entryList.size() == 0) {
+            return "emptyWall";
+        } else {
+            model.addAttribute("entryList", entryList);
+            return "wall";
+        }
     }
 
 }

@@ -21,9 +21,7 @@
 
 <body>
 
-<h1>
-    Welcome! List of posts actually published:
-</h1>
+<h1>List of posts actually published:</h1>
 
 <%int counter = 1;%>
 
@@ -49,6 +47,12 @@
                 <td style="width:100px">${i.getType()}</td>
                 <td>${i.getUser().getViewAccountName()}</td>
                 <td>${i.getContent()}</td>
+                <td>
+                    <form action="/deletePost" method="post">
+                        <input type="hidden" name="id" value="${i.getId()}" />
+                        <input type="submit" value="Delete post" />
+                    </form>
+                </td>
             </tr>
 
             <% counter = counter + 1;%>

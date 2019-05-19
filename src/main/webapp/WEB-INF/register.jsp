@@ -17,7 +17,6 @@
     Password: <input type="password" name="password"/> <br/><br/>
     LinkAccountName: <input type="text" name="linkAccountName"/><br/><br/>
     ViewAccountName: <input type="text" name="viewAccountName"/><br/><br/>
-    DateOfCreation: <input type="text" name="dateOfCreation"/><br/><br/>
     UserStatus: <input type="text" name="status"/><br/><br/>
     UserType: <input type="text" name="type"/><br/><br/>
     <input type="submit" value="Sign-up"/>

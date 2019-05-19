@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import sun.plugin.liveconnect.SecurityContextHelper;
 
 import javax.persistence.EntityNotFoundException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -37,6 +39,8 @@ public class TodoController {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     @GetMapping("/wall")
     String wall(Model model) {
@@ -59,7 +63,6 @@ public class TodoController {
     @PostMapping("/newPost")
     String newPost(
             @RequestParam("content") String content,
-            @RequestParam("dateOfCreation") String dateOfCreation,
             @RequestParam("entryStatus") String entryStatus,
             @RequestParam("entryType") String entryType,
             Model model
@@ -70,9 +73,11 @@ public class TodoController {
 
         User user = userRepository.findByUserName(currentLoggedInUsername).orElseThrow(EntityNotFoundException::new);
 
+        LocalDateTime now = LocalDateTime.now();
+
         Entry entry = new Entry();
         entry.setContent(content);
-        entry.setDateOfCreation(dateOfCreation);
+        entry.setDateOfCreation(now.format(formatter));
         entry.setStatus(Enum.valueOf(EntryStatus.class, entryStatus));
         entry.setType(Enum.valueOf(EntryType.class, entryType));
 
@@ -106,7 +111,6 @@ public class TodoController {
             @RequestParam("password") String password,
             @RequestParam("linkAccountName") String linkAccountName,
             @RequestParam("viewAccountName") String viewAccountName,
-            @RequestParam("dateOfCreation") String dateOfCreation,
             @RequestParam("status") String status,
             @RequestParam("type") String type,
             Model model
@@ -115,11 +119,13 @@ public class TodoController {
 
         User user = new User();
 
+        LocalDateTime now = LocalDateTime.now();
+
         user.setUserName(username);
         user.setPassword(passwordEncoder.encode(password));
         user.setLinkAccountName(linkAccountName);
         user.setViewAccountName(viewAccountName);
-        user.setDateOfCreation(dateOfCreation);
+        user.setDateOfCreation(now.format(formatter));
         user.setStatus(Enum.valueOf(UserStatus.class, status));
         user.setType(Enum.valueOf(UserType.class, type));
 

@@ -15,7 +15,6 @@
 
 <form action="/newPost" method="post">
     <input type="text" name="content"> Content<br><br>
-    <input type="text" name="dateOfCreation"> Date of Creation<br><br>
     <input type="text" name="entryStatus"> Entry status<br><br>
     <input type="text" name="entryType"> Entry type<br><br>
     <input type="submit" value="Add">

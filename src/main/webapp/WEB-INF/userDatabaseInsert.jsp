@@ -1,5 +1,5 @@
 <html>
-<meta http-equiv="Refresh" content="5;url=login.jsp">
+<meta http-equiv="Refresh" content="10;url=login.jsp">
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <head>
@@ -16,7 +16,7 @@
 <h3>Status: ${createdUser.getStatus()}</h3>
 <h3>Type: ${createdUser.getType()}</h3>
 
-<h2>Please wait. You will be redirect to the WALL in 5 seconds.</h2>
+<h2 style="color: red">Please wait. You will be redirect to the Login page in a few seconds.</h2>
 
 </body>
 
